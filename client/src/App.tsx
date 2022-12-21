@@ -1,16 +1,20 @@
 import React from "react";
-import logo from "./logo.svg";
 import styled from "styled-components";
-import { usePhotos } from "./hooks/usePhotos";
 import { HomeScreen } from "./components/HomePage/HomeScreen";
+import { SearchBar } from "./components/HomePage/SearchBar";
 
-const Root = styled.div``;
+const Root = styled.div`
+`;
 
 function App() {
 
+  const [input, setInput] = React.useState<string>("");
+
+
   return (
     <Root>
-      <HomeScreen/>
+      <SearchBar input={input} setInput={setInput}/>
+      <HomeScreen input={input}/>
     </Root>
   );
 }

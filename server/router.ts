@@ -1,6 +1,7 @@
-import {Router} from 'express';
-
+import { Router } from "express";
+import { getPhotos } from "./controller";
 const router = Router();
 
-router.get('/');
-router.get('/?topics=architecture');
+router.get("/", getPhotos);
+
+export default router;
