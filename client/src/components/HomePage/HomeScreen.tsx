@@ -4,10 +4,9 @@ import React from "react";
 import styled from "styled-components";
 import { usePhotos } from "../../hooks/usePhotos";
 import { Image } from "./Image";
-import { getUniqueTopics } from "../../utils/api-service";
+import { getUniqueTopicsAndUrls } from "../../utils/api-service";
 import { TopicItem } from "./TopicItem";
 import { useEffect } from "react";
-import {picturePerTopic} from '../../utils/api-service';
 
 const Root = styled.div`
   display: grid;
@@ -31,20 +30,16 @@ export const HomeScreen = ({ input }: HomeScreenProps) => {
   const { photos } = usePhotos();
 
   const [topics, setTopics] = React.useState<string[]>([]);
-  const [pictures, setPictures] = React.useState<string[]>([]);
   const [selectedTopic, setSelectedTopic] = React.useState("");
 
   const filterByTopic = (str: string, photoList: typeof photos) => {
-    if (!str) return photoList;
+    if (!str) return;
     return photoList.filter((topic) => topic.topics.includes(str));
   };
 
   useEffect(() => {
-    getUniqueTopics().then((response) => setTopics(response));
-    picturePerTopic().then((response) => setPictures(response));
+    getUniqueTopicsAndUrls().then((response) => setTopics(response));
   }, []);
-
-  console.log('this is pictures', pictures);
 
   return (
     <main>
@@ -52,9 +47,9 @@ export const HomeScreen = ({ input }: HomeScreenProps) => {
         {topics.map((item) => {
           return (
             <TopicItem
-              key={item}
-              topic={item}
-              picture={pictures}
+              key={item.topics}
+              topic={item.topics}
+              image={item.url}
               setSelectedTopic={setSelectedTopic}
             />
           );

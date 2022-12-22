@@ -15,7 +15,6 @@ export const Image = ({url, topics}:ImageProps) => {
   return (
     <Root >
       <img src={url} height={150} width={200}/> <br/>
-      <p>{topics[0]}</p>
       </Root>
   )
 }

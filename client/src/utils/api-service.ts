@@ -14,7 +14,6 @@ export const getAllData = async () => {
 
 export const getUniqueTopics = async () => {
   const data = await getAllData();
-
   let topics: string[][] = [];
 
   data.photos.forEach((topic: Photos) => {
@@ -33,19 +32,36 @@ export const getUniqueTopics = async () => {
   return res.sort();
 };
 
-export const picturePerTopic = async () => {
+interface TopicsUrls {
+  topics: string;
+  url: string;
+}
+
+export const getDesiredFormat = async () => {
   const data = await getAllData();
-  const TopicList = await getUniqueTopics();
-  const res: string[] = [];
+  const result: TopicsUrls[] = [];
+  data.photos.forEach((topic: Photos) => {
+    const topics = topic.topics;
+    const urls = topic.url;
+    for (let i = 0; i < topics.length; i++) {
+      result.push({ topics: topics[i], url: urls });
+    }
+  });
+  return result;
+};
 
-  while (TopicList.length) {
-    data.photos.forEach((topic: Photos) => {
-      if (topic.topics.indexOf(TopicList[0]) !== -1) {
-        res.push(topic.url);
-        TopicList.shift();
-      }
-    });
-  }
+export const getUniqueTopicsAndUrls = async () => {
+  const uniqueTopics = await getUniqueTopics();
+  const objArrayOfTopicsAndUrls = await getDesiredFormat();
+  const result:TopicsUrls[] = [];
 
-  return res;
+  while(uniqueTopics.length){
+  objArrayOfTopicsAndUrls.forEach((obj)=>{
+    if(uniqueTopics[0] === obj.topics){
+      result.push(obj);
+      uniqueTopics.shift();
+    }
+  })
+}
+ return result
 };
