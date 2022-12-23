@@ -7,6 +7,11 @@ import { Image } from "./Image";
 import { getUniqueTopicsAndUrls } from "../../utils/api-service";
 import { TopicItem } from "./TopicItem";
 import { useEffect } from "react";
+import {ErrorBoundary} from 'react-error-boundary';
+import {Suspense} from 'react';
+import {LoadingIndicator} from '../common/LoadingIndicator';
+import {ErrorMessage} from '../common/ErrorMessage';
+
 
 const Root = styled.div`
   display: grid;
@@ -43,6 +48,8 @@ export const HomeScreen = ({ input }: HomeScreenProps) => {
 
   return (
     <main>
+      <ErrorBoundary FallbackComponent={<ErrorMessage/>}>
+        <Suspense fallback={<LoadingIndicator/>}>
       <Root>
         {topics.map((item) => {
           return (
@@ -55,6 +62,8 @@ export const HomeScreen = ({ input }: HomeScreenProps) => {
           );
         })}
       </Root>
+      </Suspense>
+     </ErrorBoundary>
       <RootPhotos>
         {filterByTopic(selectedTopic, photos).map((item) => {
           return <Image url={item.url} topics={item.topics} />;
