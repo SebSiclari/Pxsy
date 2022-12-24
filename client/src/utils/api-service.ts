@@ -1,4 +1,5 @@
 import { Photos } from "../types/Photos";
+import {TopicsUrls} from '../types/TopicUrls';
 
 const BASE_URL = "http://localhost:3001";
 
@@ -16,7 +17,7 @@ export const getUniqueTopics = async () => {
   const data = await getAllData();
   let topics: string[][] = [];
 
-  data.photos.forEach((topic: Photos) => {
+  data.forEach((topic: Photos) => {
     topics.push(topic.topics);
   });
 
@@ -29,25 +30,24 @@ export const getUniqueTopics = async () => {
     }
   });
 
-  return res.sort();
+  return res
 };
 
-interface TopicsUrls {
-  topics: string;
-  url: string;
-}
+
 
 export const getDesiredFormat = async () => {
   const data = await getAllData();
   const result: TopicsUrls[] = [];
-  data.photos.forEach((topic: Photos) => {
+
+  data.forEach((topic: Photos) => {
     const topics = topic.topics;
     const urls = topic.url;
+    const ids = topic.id;
     for (let i = 0; i < topics.length; i++) {
-      result.push({ topics: topics[i], url: urls });
+      result.push({ topics: topics[i], url: urls, id:ids });
     }
   });
-  return result;
+  return result.sort().reverse()
 };
 
 export const getUniqueTopicsAndUrls = async () => {

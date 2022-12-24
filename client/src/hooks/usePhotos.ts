@@ -6,7 +6,7 @@ const fetcher = async () => {
   try {
     const data = await getAllData();
 
-    return data.photos.map((photo: Photos) => ({
+    return data.map((photo: Photos) => ({
       id: photo.id,
       description: photo.description,
       url: photo.url,

@@ -2,52 +2,65 @@ import React from "react";
 import styled from "styled-components";
 
 const Root = styled.div`
-align-text:center;
-`
-const StyledTopicItem = styled.div`
-  position:relative;
-  height: 3.5rem;
-  background:var(--bg) center center / cover  transparent;
+  align-text: center;
+`;
+
+interface StyleTopicItemProps {
+  image: string;
+}
+const StyledTopicItem = styled.div<StyleTopicItemProps>`
+  position: relative;
+  height: 10rem;
+  background: var(--bg) center center / contain transparent;
+  background-image: ${({ image }) => `url(${image})`};
   display: flex;
   aspect-ratio: 3 / 2;
   align-items: center;
   cursor: pointer;
-  height:20vh;
-  justify-content:center
+  justify-content: center;
 `;
 
 const Image = styled.img`
-display:block;
-height:100%;
-width:100%;
-object-fit:contain;
-backdrop-filter:blur(3px)`
+  display: block;
+  height: 100%;
+  width: 50%;
+  object-fit: contain;
+  backdrop-filter: blur(10px);
+`;
 
 const Topic = styled.div`
-bottom:1px;
-font-weight:500;
-font-size:11px;
-`
-
+  bottom: 1px;
+  font-weight: 500;
+  font-size: 11px;
+`;
 
 interface topicItemProps {
   topic: string;
   setSelectedTopic: (value: string) => void;
-  image:string;
+  image: string;
+  id: string;
 }
 
-export const TopicItem = ({ topic, setSelectedTopic, image }: topicItemProps) => {
+export const TopicItem = ({
+  topic,
+  setSelectedTopic,
+  image,
+  id,
+}: topicItemProps) => {
+
   return (
-    <Root>
-    <StyledTopicItem
-    style={{background:`url(${image})`}}
-      onClick={(e:any) => {
-        setSelectedTopic(e.target?.innerText);
+    <Root
+      id={topic}
+      onClick={(e: any) => {
+        setSelectedTopic(topic);
       }}
     >
-      <Image alt={""} src={image} /> <br/>
-    </StyledTopicItem>
-    <Topic>{topic}</Topic>
+      <StyledTopicItem image={image}>
+        <Image alt={""} src={image} /> <br />
+      </StyledTopicItem>
+      <Topic>
+        {topic} {id}
+      </Topic>
     </Root>
   );
 };
