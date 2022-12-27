@@ -22,7 +22,7 @@ const PhotoContainer = styled.div`
 `;
 
 const Root = styled.div`
-  margin-top:3rem;
+  margin-top: 3rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(235px, 0.5fr));
   gap: 5px 5px;
@@ -36,10 +36,10 @@ const RootPhotos = styled(Root)`
   grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
 `;
 
-
-export const HomeScreen = ( ) => {
+export const HomeScreen = () => {
   const { photos } = usePhotos();
 
+  const [header, setHeader] = React.useState("");
   const [input, setInput] = React.useState<string>("");
 
   const [topics, setTopics] = React.useState<TopicsUrls[]>([]);
@@ -63,19 +63,41 @@ export const HomeScreen = ( ) => {
       <SideMenu />
       <Suspense fallback={<LoadingIndicator />}>
         <PhotoContainer>
-         <SearchMenu input={input} setInput={setInput}/>
+          <SearchMenu
+            input={input}
+            setInput={setInput}
+            active={header}
+            setHeader={setHeader}
+          />
           <Root>
-            {topics?.map((item, i) => {
-              return (
-                <TopicItem
-                  key={i}
-                  topic={item.topics}
-                  image={item.url}
-                  id={item.id}
-                  setSelectedTopic={setSelectedTopic}
-                />
-              );
-            })}
+            {topics && input
+              ? topics.map((item, i) => {
+                  if (
+                    item.topics?.toLowerCase().includes(input?.toLowerCase())
+                  ) {
+                    return (
+                      <TopicItem
+                        key={i}
+                        topic={item.topics}
+                        image={item.url}
+                        id={item.id}
+                        setSelectedTopic={setSelectedTopic}
+                      />
+                    );
+                  }
+                })
+              : topics &&
+                topics.map((item, i) => {
+                  return (
+                    <TopicItem
+                      key={i}
+                      topic={item.topics}
+                      image={item.url}
+                      id={item.id}
+                      setSelectedTopic={setSelectedTopic}
+                    />
+                  );
+                })}
           </Root>
 
           <RootPhotos>

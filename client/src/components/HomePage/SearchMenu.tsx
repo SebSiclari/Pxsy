@@ -12,6 +12,7 @@ const StyledUL = styled.ul`
   font-family: canada-type-gibson;
   align-items: center;
   width: 50%;
+  cursor:pointer;
 `;
 const Header = styled.div`
   cursor: pointer;
@@ -29,7 +30,6 @@ const Header = styled.div`
 
 const SearchContainer = styled.div`
   display:flex;
-
 `
 
 const StyledInput=styled.input`
@@ -37,6 +37,12 @@ const StyledInput=styled.input`
   border:none;
 `
 
+interface RootProps {
+  active:boolean
+}
+const StyledLi = styled.li`
+  color:${(props:RootProps)=>(props.active ? "rgb(0, 138, 171);": "#999999")}
+ `
 
 
 const MainContainer = styled.nav`
@@ -52,46 +58,66 @@ const MainContainer = styled.nav`
 `
 
 const SearchInnerContainer = styled.div`
+  display:flex;
+  align-items:center;
+  gap:1rem;
 
 `
 
 
 const ImageContainer= styled.div`
-height: 2rem;
-width: 2rem;
+height: 1.5rem;
+width: 1.5rem;
+display:flex;
+justify-content:center;
+align-items:center;
 `
 const Image = styled.img`
 width:100%;
 height:100%;
 object-fit:contain;
 `
+
 interface SearchBarProps {
   input: string;
   setInput: (value: string) => void;
+  setHeader: (value:string) => void;
+  active:boolean;
 }
 
-export const SearchMenu = ({ setInput, input }: SearchBarProps) => {
+
+
+export const SearchMenu = ({ setInput, input, active, setHeader }: SearchBarProps) => {
+
+  async function handleClick(e:any){
+    setHeader(e.target.innerText)
+  }
+
   return (
     <MainContainer>
       <StyledUL>
-        <li>
+        <StyledLi onClick={(e)=> handleClick(e)} active={active}>
           <p>All</p>
-        </li>
-        <li>
+        </StyledLi>
+        <StyledLi onClick={(e)=> handleClick(e)} active={active}>
           <p>News</p>
-        </li>
+        </StyledLi>
         <li>
           <p>Ignored</p>
         </li>
         </StyledUL>
         <SearchContainer>
-
-        <StyledInput
-          placeholder="Search"
-          type={"text"}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
+        <SearchInnerContainer>
+          <ImageContainer>
+              <Image src={'search.svg'} alt="search-icon"/>
+            </ImageContainer>
+          <StyledInput
+            placeholder="Search"
+            type={"text"}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+        </SearchInnerContainer>
         <Header>IMPORT</Header>
       </SearchContainer>
     </MainContainer>

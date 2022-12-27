@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { HomeScreen } from "./components/HomePage/HomeScreen";
+import { HomeScreen } from "../components/HomePage/HomeScreen";
 import {ErrorBoundary} from 'react-error-boundary';
-import { ErrorMessage } from "./components/common/ErrorBoundary";
+import { ErrorMessage } from "../components/common/ErrorBoundary";
 
 const Root = styled.div`
 `;

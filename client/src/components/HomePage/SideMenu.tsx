@@ -48,6 +48,9 @@ export const SideMenu = () => {
       <Header> PIXSY</Header>
       <StyledUL>
         <li>
+        <ImageContainer>
+          <Image src={'matches-logo.png'} alt="icon" />
+          </ImageContainer>
           <p>MATCHES</p>
         </li>
         <li>
@@ -57,12 +60,21 @@ export const SideMenu = () => {
           <p>IMAGES</p>
         </li>
         <li>
+        <ImageContainer>
+          <Image src={'cases-logo.png'} alt="icon" />
+          </ImageContainer>
           <p>CASES</p>
         </li>
         <li>
+        <ImageContainer>
+          <Image src={'taxedowns-logo.png'} alt="icon" />
+          </ImageContainer>
           <p>TAXEDOWNS</p>
         </li>
         <li>
+        <ImageContainer>
+          <Image src={'register-logo.png'} alt="icon" />
+          </ImageContainer>
           <p>REGISTER</p>
         </li>
       </StyledUL>
