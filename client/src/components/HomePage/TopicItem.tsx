@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Root = styled.div`
-  align-text: center;
+  justify-content:center
 `;
 
 interface StyleTopicItemProps {
@@ -59,7 +59,7 @@ export const TopicItem = ({
         <Image alt={""} src={image} /> <br />
       </StyledTopicItem>
       <Topic>
-        {topic} {id}
+        {topic}
       </Topic>
     </Root>
   );

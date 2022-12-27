@@ -11,6 +11,7 @@ import { Suspense } from "react";
 import { LoadingIndicator } from "../common/LoadingIndicator";
 import { TopicsUrls } from "../../types/TopicUrls";
 import { SideMenu } from "./SideMenu";
+import { SearchMenu } from "./SearchMenu";
 
 const StyledMain = styled.main`
   display: flex;
@@ -21,11 +22,11 @@ const PhotoContainer = styled.div`
 `;
 
 const Root = styled.div`
+  margin-top:3rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(235px, 0.5fr));
   gap: 5px 5px;
   text-align: center;
-
 `;
 
 const RootPhotos = styled(Root)`
@@ -35,12 +36,11 @@ const RootPhotos = styled(Root)`
   grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
 `;
 
-interface HomeScreenProps {
-  input: string;
-}
 
-export const HomeScreen = ({ input: HomeScreenProps }) => {
+export const HomeScreen = ( ) => {
   const { photos } = usePhotos();
+
+  const [input, setInput] = React.useState<string>("");
 
   const [topics, setTopics] = React.useState<TopicsUrls[]>([]);
   const [selectedTopic, setSelectedTopic] = React.useState("");
@@ -61,15 +61,14 @@ export const HomeScreen = ({ input: HomeScreenProps }) => {
   return (
     <StyledMain>
       <SideMenu />
-
       <Suspense fallback={<LoadingIndicator />}>
         <PhotoContainer>
-          {/* <MenuBar/> */}
+         <SearchMenu input={input} setInput={setInput}/>
           <Root>
-            {topics?.map((item) => {
+            {topics?.map((item, i) => {
               return (
                 <TopicItem
-                  key={item.id}
+                  key={i}
                   topic={item.topics}
                   image={item.url}
                   id={item.id}
