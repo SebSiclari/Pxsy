@@ -27,7 +27,7 @@ const MenuContainer = styled.nav`
   flex-direction: column;
   align-items:center;
   gap: 1rem;
-  margin-right:5rem;
+  margin-right:6rem;
   width:6rem;
   border-right:1px solid rgb(239, 239, 239);
 `;
@@ -68,7 +68,7 @@ export const SideMenu = () => {
         <ImageContainer>
           <Image src={'taxedowns-logo.png'} alt="icon" />
           </ImageContainer>
-          <p>TAXEDOWNS</p>
+          <p>TAKEDOWNS</p>
         </li>
         <li>
         <ImageContainer>

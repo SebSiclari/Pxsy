@@ -2,7 +2,7 @@
 //@ts-nocheck
 import React from "react";
 import styled from "styled-components";
-import { getUniqueTopicsAndUrls } from "../../utils/api-service";
+import { getMatchersPerTopics, getUniqueTopicsAndUrls } from "../../utils/api-service";
 import { TopicItem } from "./TopicItem";
 import { useEffect } from "react";
 import { Suspense } from "react";
@@ -21,7 +21,7 @@ const Root = styled.div`
   margin-top: 3rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(235px, 0.5fr));
-  gap: 5px 5px;
+  gap: 1.5rem 2.5rem;
   text-align: center;
 `;
 
@@ -33,14 +33,13 @@ export const HomeScreen = ({setSelectedTopic}:HomeScreenProps) => {
   const [header, setHeader] = React.useState("");
   const [input, setInput] = React.useState<string>("");
   const [topics, setTopics] = React.useState<TopicsUrls[]>([]);
-
   useEffect(() => {
     getUniqueTopicsAndUrls()
       .then((response) => setTopics(response))
       .catch((e) => console.log(e));
   }, []);
 
-  console.log("this is topics", topics);
+  console.log('this is topics', topics);
 
   return (
     <StyledMain>
@@ -57,14 +56,14 @@ export const HomeScreen = ({setSelectedTopic}:HomeScreenProps) => {
             {topics && input
               ? topics.map((item, i) => {
                   if (
-                    item.topics?.toLowerCase().includes(input?.toLowerCase())
+                    item.topic?.toLowerCase().includes(input?.toLowerCase())
                   ) {
                     return (
                       <TopicItem
                         key={i}
-                        topic={item.topics}
+                        topic={item.topic}
                         image={item.url}
-                        id={item.id}
+                        matches={item.count}
                         setSelectedTopic={setSelectedTopic}
                       />
                     );
@@ -75,9 +74,9 @@ export const HomeScreen = ({setSelectedTopic}:HomeScreenProps) => {
                   return (
                     <TopicItem
                       key={i}
-                      topic={item.topics}
+                      topic={item.topic}
                       image={item.url}
-                      id={item.id}
+                      matches={item.count}
                       setSelectedTopic={setSelectedTopic}
                     />
                   );

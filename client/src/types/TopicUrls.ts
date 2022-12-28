@@ -1,6 +1,6 @@
 
 export interface TopicsUrls {
-  topics: string;
+  topic: string;
   url: string;
   id:string;
 }

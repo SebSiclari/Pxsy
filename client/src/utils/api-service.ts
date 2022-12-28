@@ -1,5 +1,7 @@
 import { Photos } from "../types/Photos";
-import {TopicsUrls} from '../types/TopicUrls';
+import { TopicsUrls } from "../types/TopicUrls";
+import { MatchesTopics } from "../types/MatchesTopics";
+import { PhotoCount } from "../types/PhotoCount";
 
 const BASE_URL = "http://localhost:3001";
 
@@ -13,11 +15,13 @@ export const getAllData = async () => {
   }
 };
 
-export const filterByTopic = (str: string, photoList:Photos[]) => {
+// FUNCTION THAT WILL BE USED TO FILTER PHOTOS BY TOPICS
+export const filterByTopic = (str: string, photoList: Photos[]) => {
   if (str) return photoList.filter((topic) => topic.topics.includes(str));
   else return photoList;
 };
 
+// FUNCTION THAT WILL BE USED TO GET ALL 10 TOPICS INDIVIDUALLY FOR THE HOMESCREEN
 export const getUniqueTopics = async () => {
   const data = await getAllData();
   let topics: string[][] = [];
@@ -35,11 +39,12 @@ export const getUniqueTopics = async () => {
     }
   });
 
-  return res
+  return res;
 };
 
-
-
+// FUNCTION USED TO TRANSFORM THE DATA IN THE DESIRED FROMAT WHICH WILL BE USED TO DISPLAY THE IMAGE AND TOPIC
+// IN THE HOME PAGE
+// EX. OUTPUT:[{topics:'architecture', url:'623grfbhf73u3ifh3h87th5uif', id:'dh74gr'}, etc.]
 export const getDesiredFormat = async () => {
   const data = await getAllData();
   const result: TopicsUrls[] = [];
@@ -49,24 +54,31 @@ export const getDesiredFormat = async () => {
     const urls = topic.url;
     const ids = topic.id;
     for (let i = 0; i < topics.length; i++) {
-      result.push({ topics: topics[i], url: urls, id:ids });
+      result.push({ topic: topics[i], url: urls, id: ids });
     }
   });
-  return result.sort().reverse()
+  return result;
 };
 
+// FUNCTION THAT WILL BE USED TO DISPLAY INDIVIDUALLY THE TOPICS AND THE
+// CORRESPONDING IMAGES PER TOPIC IN THE HOMESCREEN
 export const getUniqueTopicsAndUrls = async () => {
-  const uniqueTopics = await getUniqueTopics();
   const objArrayOfTopicsAndUrls = await getDesiredFormat();
-  const result:TopicsUrls[] = [];
+  const counts = new Map<string, PhotoCount>();
 
-  while(uniqueTopics.length){
-  objArrayOfTopicsAndUrls.forEach((obj)=>{
-    if(uniqueTopics[0] === obj.topics){
-      result.push(obj);
-      uniqueTopics.shift();
+  for (const photo of objArrayOfTopicsAndUrls) {
+    const { topic, url } = photo;
+    if (!counts.has(topic)) {
+      counts.set(topic, { topic, url, count: 1 });
+    } else {
+      const photoCount = counts.get(topic);
+      if (photoCount) {
+        photoCount.count += 1;
+      }
     }
-  })
-}
- return result
+  }
+
+  const result = Array.from(counts.values());
+
+  return result;
 };

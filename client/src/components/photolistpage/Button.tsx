@@ -22,7 +22,7 @@ export const Button = () => {
 
   const handleClick = (e:React.MouseEvent) =>{
     e.preventDefault();
-    navigate('/')
+    navigate('/');
   }
   return (
     <StyledButton onClick={handleClick}>

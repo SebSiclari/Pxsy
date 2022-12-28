@@ -54,14 +54,13 @@ const MainContainer = styled.nav`
   width: 70vw;
   justify-content: center;
   overflow: hidden;
-  box-shadow: 2px 3px 10px 20px rgba(0,0,0,0.5);
+  box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.5);
 `
 
 const SearchInnerContainer = styled.div`
   display:flex;
   align-items:center;
   gap:1rem;
-
 `
 
 
@@ -100,7 +99,7 @@ export const SearchMenu = ({ setInput, input, active, setHeader }: SearchBarProp
           <p>All</p>
         </StyledLi>
         <StyledLi onClick={(e)=> handleClick(e)} active={active}>
-          <p>News</p>
+          <p>New</p>
         </StyledLi>
         <li>
           <p>Ignored</p>
