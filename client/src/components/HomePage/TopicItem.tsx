@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Root = styled.div`
   justify-content:center
@@ -48,15 +49,18 @@ export const TopicItem = ({
   id,
 }: topicItemProps) => {
 
+  const navigate = useNavigate();
+  const handleClick = (e:React.MouseEvent) =>{
+    setSelectedTopic(topic);
+    navigate('/photo/list');
+  }
   return (
     <Root
       id={topic}
-      onClick={(e: any) => {
-        setSelectedTopic(topic);
-      }}
+      onClick={handleClick}
     >
       <StyledTopicItem image={image}>
-        <Image alt={""} src={image} /> <br />
+        <Image alt={"topic"} src={image} /> <br />
       </StyledTopicItem>
       <Topic>
         {topic}

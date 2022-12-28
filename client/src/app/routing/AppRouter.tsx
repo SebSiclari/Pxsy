@@ -5,11 +5,13 @@ import { HomeScreen } from '../../components/HomePage/HomeScreen';
 import { PhotoListPage } from '../../components/photolistpage/PhotoListPage';
 
 export const AppRouter = () => {
+
+  const [selectedTopic, setSelectedTopic] = React.useState("")
   return (
    <BrowserRouter>
    <Routes>
-     <Route path={HOME} element={<HomeScreen/>} />
-     <Route path={LISTS} element={<PhotoListPage/>} />
+     <Route path={HOME} element={<HomeScreen setSelectedTopic={setSelectedTopic}/>} />
+     <Route path={LISTS} element={<PhotoListPage selectedTopic={selectedTopic}/>} />
    </Routes>
    </BrowserRouter>
   )

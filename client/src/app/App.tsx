@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { HomeScreen } from "../components/HomePage/HomeScreen";
 import {ErrorBoundary} from 'react-error-boundary';
 import { ErrorMessage } from "../components/common/ErrorBoundary";
+import {AppRouter} from './routing'
 
 const Root = styled.div`
 `;
@@ -12,7 +12,7 @@ function App() {
   return (
     <Root>
     <ErrorBoundary FallbackComponent={ErrorMessage}>
-      <HomeScreen />
+      <AppRouter/>
       </ErrorBoundary>
     </Root>
   );

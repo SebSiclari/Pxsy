@@ -13,6 +13,11 @@ export const getAllData = async () => {
   }
 };
 
+export const filterByTopic = (str: string, photoList:Photos[]) => {
+  if (str) return photoList.filter((topic) => topic.topics.includes(str));
+  else return photoList;
+};
+
 export const getUniqueTopics = async () => {
   const data = await getAllData();
   let topics: string[][] = [];

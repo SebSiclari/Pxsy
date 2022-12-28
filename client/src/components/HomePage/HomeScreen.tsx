@@ -3,7 +3,7 @@
 import React from "react";
 import styled from "styled-components";
 import { usePhotos } from "../../hooks/usePhotos";
-import { Image } from "./Image";
+import { Image } from "../photolistpage/Image";
 import { getUniqueTopicsAndUrls } from "../../utils/api-service";
 import { TopicItem } from "./TopicItem";
 import { useEffect } from "react";
@@ -12,7 +12,7 @@ import { LoadingIndicator } from "../common/LoadingIndicator";
 import { TopicsUrls } from "../../types/TopicUrls";
 import { SideMenu } from "./SideMenu";
 import { SearchMenu } from "./SearchMenu";
-
+import { filterByTopic} from '../../utils/api-service'
 const StyledMain = styled.main`
   display: flex;
 `;
@@ -36,19 +36,18 @@ const RootPhotos = styled(Root)`
   grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
 `;
 
-export const HomeScreen = () => {
+interface HomeScreenProps{
+  setSelectedTopic:(value:string) => void;
+}
+
+export const HomeScreen = ({setSelectedTopic}:HomeScreenProps) => {
   const { photos } = usePhotos();
 
   const [header, setHeader] = React.useState("");
   const [input, setInput] = React.useState<string>("");
 
   const [topics, setTopics] = React.useState<TopicsUrls[]>([]);
-  const [selectedTopic, setSelectedTopic] = React.useState("");
-
-  const filterByTopic = (str: string, photoList: typeof photos) => {
-    if (str) return photoList.filter((topic) => topic.topics.includes(str));
-    else return photoList;
-  };
+  // const [selectedTopic, setSelectedTopic] = React.useState("");
 
   useEffect(() => {
     getUniqueTopicsAndUrls()
@@ -100,13 +99,13 @@ export const HomeScreen = () => {
                 })}
           </Root>
 
-          <RootPhotos>
+          {/* <RootPhotos>
             {filterByTopic(selectedTopic, photos).map((item) => {
               return (
                 <Image key={item.url} url={item.url} topics={item.topics} />
               );
             })}
-          </RootPhotos>
+          </RootPhotos> */}
         </PhotoContainer>
       </Suspense>
     </StyledMain>

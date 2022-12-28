@@ -1,7 +1,13 @@
 import React from 'react'
+import styled from 'styled-components';
+const StyledHeader = styled.div`
 
+`
 export const Header = () => {
   return (
-    <div>Header</div>
+    <StyledHeader>
+      
+    </StyledHeader>
+
   )
 }
