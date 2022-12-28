@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { usePhotos } from '../../hooks/usePhotos';
 import { filterByTopic } from '../../utils/api-service';
 import {Image} from './Image'
+import { Button } from './Button';
 
 const PhotoListWrapper = styled.div `
 `
@@ -27,6 +28,9 @@ width: 100vw;
 grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
 `;
 
+const ButtonWrapper = styled.div`
+`
+
 interface PhotoListPageProps{
   selectedTopic:string
 }
@@ -36,8 +40,9 @@ export const PhotoListPage = ({selectedTopic}:PhotoListPageProps) => {
   const {photos} = usePhotos()
 
   return (
+    <>
     <PhotoListWrapper>
-    <Header>{selectedTopic.toUpperCase()}</Header>
+    <Header>{selectedTopic ? selectedTopic.toUpperCase(): 'ALL IMAGES'}</Header>
     <RootPhotos>
     {filterByTopic(selectedTopic, photos).map((item) => {
       return (
@@ -46,5 +51,9 @@ export const PhotoListPage = ({selectedTopic}:PhotoListPageProps) => {
     })}
   </RootPhotos>
   </PhotoListWrapper>
+  <ButtonWrapper>
+  <Button></Button>
+  </ButtonWrapper>
+</>
   )
 }

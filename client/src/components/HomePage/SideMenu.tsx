@@ -21,7 +21,6 @@ height:3rem;
 width:6rem;
 font-weight:bold;
 font-size:smaller;
-background-image:url(PixsyLogo.webp)
 `;
 const MenuContainer = styled.nav`
   display: flex;
