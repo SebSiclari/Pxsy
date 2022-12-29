@@ -81,7 +81,7 @@ export const TopicItem = ({
         <Image alt={"topic"} src={image} /> <br />
       </StyledTopicItem>
       <Topic>
-        {topic[0].toUpperCase() + topic.slice(1)}
+        {!topic.includes('-') ? topic[0].toUpperCase() + topic.slice(1): topic.split('-').map(item=> item[0].toUpperCase()+item.slice(1)).join('-')}
       </Topic>
       <Matches>
       {matches > 1 ? matches + ' matches': matches + ' match'}

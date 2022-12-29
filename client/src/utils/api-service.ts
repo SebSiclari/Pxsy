@@ -1,6 +1,5 @@
 import { Photos } from "../types/Photos";
 import { TopicsUrls } from "../types/TopicUrls";
-import { MatchesTopics } from "../types/MatchesTopics";
 import { PhotoCount } from "../types/PhotoCount";
 
 const BASE_URL = "http://localhost:3001";
@@ -15,13 +14,13 @@ export const getAllData = async () => {
   }
 };
 
-// FUNCTION THAT WILL BE USED TO FILTER PHOTOS BY TOPICS
+// FUNCTION USED TO FILTER PHOTOS BY TOPICS
 export const filterByTopic = (str: string, photoList: Photos[]) => {
   if (str) return photoList.filter((topic) => topic.topics.includes(str));
   else return photoList;
 };
 
-// FUNCTION THAT WILL BE USED TO GET ALL 10 TOPICS INDIVIDUALLY FOR THE HOMESCREEN
+// FUNCTION USED TO GET ALL 10 TOPICS INDIVIDUALLY FOR THE HOMESCREEN
 export const getUniqueTopics = async () => {
   const data = await getAllData();
   let topics: string[][] = [];
@@ -52,9 +51,8 @@ export const getDesiredFormat = async () => {
   data.forEach((topic: Photos) => {
     const topics = topic.topics;
     const urls = topic.url;
-    const ids = topic.id;
     for (let i = 0; i < topics.length; i++) {
-      result.push({ topic: topics[i], url: urls, id: ids });
+      result.push({ topic: topics[i], url: urls});
     }
   });
   return result;

@@ -29,6 +29,15 @@ grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
 `;
 
 const ButtonWrapper = styled.div`
+position:relative;
+display:flex;
+align-items: center;
+justify-content:center;
+bottom: 2rem;
+margin-top:3rem;
+margin-bottom: 1.5rem;
+margin-left:2.5rem;
+width:130vh
 `
 
 interface PhotoListPageProps{
@@ -39,6 +48,9 @@ export const PhotoListPage = ({selectedTopic}:PhotoListPageProps) => {
 
   const {photos} = usePhotos()
 
+  console.log(photos)
+  console.log('this is selected topic', selectedTopic)
+
   return (
     <>
     <PhotoListWrapper>
@@ -46,14 +58,14 @@ export const PhotoListPage = ({selectedTopic}:PhotoListPageProps) => {
     <RootPhotos>
     {filterByTopic(selectedTopic, photos).map((item) => {
       return (
-        <Image key={item.url} url={item.url} topics={item.topics} />
+        <Image key={item.url} url={item.url} description={item.description} />
       );
     })}
+    <ButtonWrapper>
+    <Button></Button>
+    </ButtonWrapper>
   </RootPhotos>
   </PhotoListWrapper>
-  <ButtonWrapper>
-  <Button></Button>
-  </ButtonWrapper>
 </>
   )
 }
