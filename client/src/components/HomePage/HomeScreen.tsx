@@ -1,13 +1,12 @@
-// @ts-ignore
-//@ts-nocheck
+
 import React from "react";
 import styled from "styled-components";
-import { getMatchersPerTopics, getUniqueTopicsAndUrls } from "../../utils/api-service";
+import {PhotoCount} from '../../types/PhotoCount'
+import { getUniqueTopicsAndUrls } from "../../utils/api-service";
 import { TopicItem } from "./TopicItem";
 import { useEffect } from "react";
 import { Suspense } from "react";
 import { LoadingIndicator } from "../common/LoadingIndicator";
-import { TopicsUrls } from "../../types/TopicUrls";
 import { SideMenu } from "./SideMenu";
 import { SearchMenu } from "./SearchMenu";
 const StyledMain = styled.main`
@@ -30,9 +29,9 @@ interface HomeScreenProps{
 }
 
 export const HomeScreen = ({setSelectedTopic}:HomeScreenProps) => {
-  const [header, setHeader] = React.useState("");
+  const [header, setHeader] = React.useState<string>("");
   const [input, setInput] = React.useState<string>("");
-  const [topics, setTopics] = React.useState<TopicsUrls[]>([]);
+  const [topics, setTopics] = React.useState<PhotoCount[]>([]);
   useEffect(() => {
     getUniqueTopicsAndUrls()
       .then((response) => setTopics(response))
@@ -49,7 +48,7 @@ export const HomeScreen = ({setSelectedTopic}:HomeScreenProps) => {
           <SearchMenu
             input={input}
             setInput={setInput}
-            active={header}
+           // active={header}
             setHeader={setHeader}
           />
           <Root>
@@ -70,7 +69,7 @@ export const HomeScreen = ({setSelectedTopic}:HomeScreenProps) => {
                   }
                 })
               : topics &&
-                topics.map((item, i) => {
+                topics.map((item,i) => {
                   return (
                     <TopicItem
                       key={i}

@@ -23,7 +23,7 @@ export const filterByTopic = (str: string, photoList: Photos[]) => {
 // FUNCTION USED TO GET ALL 10 TOPICS INDIVIDUALLY FOR THE HOMESCREEN
 export const getUniqueTopics = async () => {
   const data = await getAllData();
-  let topics: string[][] = [];
+  const topics: string[][] = [];
 
   data.forEach((topic: Photos) => {
     topics.push(topic.topics);

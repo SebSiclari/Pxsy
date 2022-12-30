@@ -40,8 +40,8 @@ const StyledInput=styled.input`
 interface RootProps {
   active:boolean
 }
+// color:${(props:RootProps)=>(props.active ? "rgb(0, 138, 171);": "#999999")}
 const StyledLi = styled.li`
-  color:${(props:RootProps)=>(props.active ? "rgb(0, 138, 171);": "#999999")}
  `
 
 
@@ -81,7 +81,7 @@ interface SearchBarProps {
   input: string;
   setInput: (value: string) => void;
   setHeader: (value:string) => void;
-  active:boolean;
+  active?:boolean;
 }
 
 
@@ -95,10 +95,10 @@ export const SearchMenu = ({ setInput, input, active, setHeader }: SearchBarProp
   return (
     <MainContainer>
       <StyledUL>
-        <StyledLi onClick={(e)=> handleClick(e)} active={active}>
+        <StyledLi onClick={(e)=> handleClick(e)} /*active={active}*/ >
           <p>All</p>
         </StyledLi>
-        <StyledLi onClick={(e)=> handleClick(e)} active={active}>
+        <StyledLi onClick={(e)=> handleClick(e)} /*active={active} */>
           <p>New</p>
         </StyledLi>
         <li>

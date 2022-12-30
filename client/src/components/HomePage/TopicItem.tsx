@@ -3,8 +3,10 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 const Root = styled.div`
-  justify-content:center;
-  align-items:center;
+display:flex;
+flex-direction:column;
+align-items:center;
+margin-bottom:2rem;
 `;
 
 interface StyleTopicItemProps {
@@ -38,8 +40,6 @@ const Topic = styled.div`
   font-size: 15px;
   display:flex;
   justify-content:center;
-  margin-right:3.5rem;
-  margin-top:.5rem;
 `;
 
 const Matches = styled.div`
@@ -49,7 +49,6 @@ const Matches = styled.div`
   font-size: 10px;
   display:flex;
   justify-content:center;
-  margin-right:3.5rem;
 `
 
 interface topicItemProps {
@@ -68,6 +67,7 @@ export const TopicItem = ({
 
   const navigate = useNavigate();
   const handleClick = (e:React.MouseEvent) =>{
+    e.preventDefault()
     setSelectedTopic(topic);
     navigate('/photo/list');
   }
@@ -81,7 +81,7 @@ export const TopicItem = ({
         <Image alt={"topic"} src={image} /> <br />
       </StyledTopicItem>
       <Topic>
-        {!topic.includes('-') ? topic[0].toUpperCase() + topic.slice(1): topic.split('-').map(item=> item[0].toUpperCase()+item.slice(1)).join('-')}
+        {!topic.includes('-') ? topic[0].toUpperCase() + topic.slice(1) : topic.split('-').map(item=> item[0].toUpperCase()+item.slice(1)).join('-')}
       </Topic>
       <Matches>
       {matches > 1 ? matches + ' matches': matches + ' match'}

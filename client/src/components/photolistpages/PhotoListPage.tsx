@@ -6,6 +6,9 @@ import {Image} from './Image'
 import { Button } from './Button';
 
 const PhotoListWrapper = styled.div `
+display:flex;
+flex-direction:column;
+align-items:center;
 `
 const Header = styled.div`
 display:flex;
@@ -26,18 +29,19 @@ text-align: center;
 height: 80vh;
 width: 100vw;
 grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+overflow-y:scroll;
 `;
 
 const ButtonWrapper = styled.div`
-position:relative;
+position:fixed;
+left:0;
+right:0;
 display:flex;
 align-items: center;
 justify-content:center;
-bottom: 2rem;
-margin-top:3rem;
-margin-bottom: 1.5rem;
-margin-left:2.5rem;
-width:130vh
+bottom: 1rem;
+width:100%;
+z-index:2;
 `
 
 interface PhotoListPageProps{
@@ -61,10 +65,10 @@ export const PhotoListPage = ({selectedTopic}:PhotoListPageProps) => {
         <Image key={item.url} url={item.url} description={item.description} />
       );
     })}
-    <ButtonWrapper>
-    <Button></Button>
-    </ButtonWrapper>
   </RootPhotos>
+  <ButtonWrapper>
+  <Button></Button>
+  </ButtonWrapper>
   </PhotoListWrapper>
 </>
   )

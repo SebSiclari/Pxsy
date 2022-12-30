@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {useNavigate} from 'react-router-dom'
 
 const StyledUL = styled.ul`
   display: flex;
@@ -32,6 +33,7 @@ const MenuContainer = styled.nav`
   border-right:1px solid rgb(239, 239, 239);
 `;
 const ImageContainer= styled.div`
+cursor:pointer;
 height: 2rem;
 width: 2rem;
 `
@@ -42,6 +44,19 @@ object-fit:contain;
 `
 
 export const SideMenu = () => {
+
+  const navigate = useNavigate()
+
+  const navigateToRegistrationPage = (e:React.MouseEvent) =>{
+    e.preventDefault()
+    navigate('/registration')
+  }
+
+  const handleClick = (e:React.MouseEvent)=>{
+    e.preventDefault();
+    navigate('/all')
+  }
+
   return (
     <MenuContainer>
       <Header> PIXSY</Header>
@@ -52,7 +67,7 @@ export const SideMenu = () => {
           </ImageContainer>
           <p>MATCHES</p>
         </li>
-        <li>
+        <li onClick={handleClick}>
           <ImageContainer>
           <Image src={'images-logo.png'} alt="icon" />
           </ImageContainer>
@@ -70,7 +85,7 @@ export const SideMenu = () => {
           </ImageContainer>
           <p>TAKEDOWNS</p>
         </li>
-        <li>
+        <li onClick={navigateToRegistrationPage}>
         <ImageContainer>
           <Image src={'register-logo.png'} alt="icon" />
           </ImageContainer>
