@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {StyledItem} from './StyledItem'
 
 const StyledUL = styled.ul`
   display: flex;
@@ -7,9 +8,6 @@ const StyledUL = styled.ul`
   flex:1;
   gap: 3rem;
   list-style: none;
-  font-size: 16.8px;
-  color: #999999;
-  font-family: canada-type-gibson;
   align-items: center;
   width: 50%;
   cursor:pointer;
@@ -36,15 +34,6 @@ const StyledInput=styled.input`
   outline:none;
   border:none;
 `
-
-interface RootProps {
-  active:boolean
-}
-// color:${(props:RootProps)=>(props.active ? "rgb(0, 138, 171);": "#999999")}
-const StyledLi = styled.li`
- `
-
-
 const MainContainer = styled.nav`
   display: flex;
   flex-direction: row;
@@ -62,8 +51,6 @@ const SearchInnerContainer = styled.div`
   align-items:center;
   gap:1rem;
 `
-
-
 const ImageContainer= styled.div`
 height: 1.5rem;
 width: 1.5rem;
@@ -80,30 +67,19 @@ object-fit:contain;
 interface SearchBarProps {
   input: string;
   setInput: (value: string) => void;
-  setHeader: (value:string) => void;
-  active?:boolean;
 }
 
 
 
-export const SearchMenu = ({ setInput, input, active, setHeader }: SearchBarProps) => {
+export const SearchMenu = ({ setInput, input, }: SearchBarProps) => {
 
-  async function handleClick(e:any){
-    setHeader(e.target.innerText)
-  }
+  const [header, setHeader] = React.useState<string>('')
+  const headers=['All', 'New', 'Ignored']
 
   return (
     <MainContainer>
       <StyledUL>
-        <StyledLi onClick={(e)=> handleClick(e)} /*active={active}*/ >
-          <p>All</p>
-        </StyledLi>
-        <StyledLi onClick={(e)=> handleClick(e)} /*active={active} */>
-          <p>New</p>
-        </StyledLi>
-        <li>
-          <p>Ignored</p>
-        </li>
+        {headers.map((item:string, i:number)=>{ return (<StyledItem key={i} setHeader={setHeader} active={header===item} item={item}/>)})}
         </StyledUL>
         <SearchContainer>
         <SearchInnerContainer>

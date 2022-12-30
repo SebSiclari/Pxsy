@@ -3,12 +3,12 @@ import React from "react";
 import styled from "styled-components";
 import {PhotoCount} from '../../types/PhotoCount'
 import { getUniqueTopicsAndUrls } from "../../utils/api-service";
-import { TopicItem } from "./TopicItem";
+import { TopicItem } from './TopicItem';
 import { useEffect } from "react";
 import { Suspense } from "react";
 import { LoadingIndicator } from "../common/LoadingIndicator";
-import { SideMenu } from "./SideMenu";
-import { SearchMenu } from "./SearchMenu";
+import { SideMenu } from './sideMenu/SideMenu'
+import { SearchMenu } from './searchMenu/SearchMenu'
 const StyledMain = styled.main`
   display: flex;
 `;
@@ -29,7 +29,6 @@ interface HomeScreenProps{
 }
 
 export const HomeScreen = ({setSelectedTopic}:HomeScreenProps) => {
-  const [header, setHeader] = React.useState<string>("");
   const [input, setInput] = React.useState<string>("");
   const [topics, setTopics] = React.useState<PhotoCount[]>([]);
   useEffect(() => {
@@ -48,8 +47,6 @@ export const HomeScreen = ({setSelectedTopic}:HomeScreenProps) => {
           <SearchMenu
             input={input}
             setInput={setInput}
-           // active={header}
-            setHeader={setHeader}
           />
           <Root>
             {topics && input

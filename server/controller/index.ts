@@ -26,8 +26,6 @@ export const getById = async (req: Request, res: Response) => {
       { headers: { "Accept-Encoding": "gzip,deflate,compress" } }
     );
     const { id } = req.params;
-    console.log("id is", id);
-    console.log(response.data);
     const single = response.data.photos.find((item: any) => item.id == id);
     res.send(single);
     res.status(200);
