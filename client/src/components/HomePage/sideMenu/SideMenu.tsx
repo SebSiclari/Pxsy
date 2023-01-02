@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import { StyledLi } from "./StyledLi";
 
 const StyledUL = styled.ul`
@@ -33,29 +32,9 @@ const MenuContainer = styled.nav`
   width: 6rem;
   border-right: 1px solid rgb(239, 239, 239);
 `;
-const ImageContainer = styled.div`
-  cursor: pointer;
-  height: 2rem;
-  width: 2rem;
-`;
-const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-`;
 
 export const SideMenu = () => {
-  // const navigate = useNavigate()
 
-  // const navigateToRegistrationPage = (e:React.MouseEvent) =>{
-  //   e.preventDefault()
-  //   navigate('/registration')
-  // }
-
-  // const handleClick = (e:React.MouseEvent)=>{
-  //   e.preventDefault();
-  //   navigate('/all')
-  // }
 
   const [option, setOption] = React.useState<string>("");
 
@@ -76,7 +55,7 @@ export const SideMenu = () => {
     <MenuContainer>
       <Header> PIXSY</Header>
       <StyledUL>
-        {sideMenuOptions.map((item, i) => {
+        {sideMenuOptions.map((item:SideMenuOptions, i:number) => {
           return (
             <StyledLi
               key={i}

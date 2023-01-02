@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {useNavigate} from 'react-router-dom'
 
 interface StyledLiProps {
   option:string;
@@ -33,9 +34,13 @@ object-fit:contain;
 
 export const StyledLi = ({option, src, active, setOption}:StyledLiProps) => {
 
+  const navigate = useNavigate()
   const onClick = (e:any) => {
     e.preventDefault();
-    setOption(e.target.innerText);
+    if(e.target.innerText === 'IMAGES'){
+      navigate('/all')
+    }
+    else setOption(e.target.innerText);
   }
 
   return (
