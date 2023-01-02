@@ -2,11 +2,11 @@
 
 
 ## CLIENT
-Change directory to client- cd client 
-run npm i to install dependencies 
-run npm start
+1. Change directory to client- cd client 
+2. run npm i to install dependencies 
+3. run npm start
 
 ## SERVER
-Change directory to server - cd server
-run npx nodemon index.ts to run 
+1. Change directory to server - cd server
+2. run npx nodemon index.ts to run 
 
